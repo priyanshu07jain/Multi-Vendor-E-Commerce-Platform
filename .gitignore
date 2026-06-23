@@ -24,3 +24,17 @@ backend/design-decision.md
 backend/interview_question.md
 backend/questions_answers.md
 backend/topice_covered.md
+
+
+venv/
+.env
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+.idea/
+.vscode/
+
+db.sqlite3

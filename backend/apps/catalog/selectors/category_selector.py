@@ -1,6 +1,5 @@
 from apps.catalog.models import Category
 
-
 class CategorySelector:
 
     @staticmethod
@@ -15,3 +14,6 @@ class CategorySelector:
                 "parent"
             )
         )
+    
+
+

@@ -37,4 +37,17 @@ urlpatterns = [
             "apps.catalog.api.urls"
         )
     ),
+    path(
+        "api/inventory/",
+        include(
+            "apps.inventory.api.urls"
+        )
+    ),
+    path(
+    "api/cart/",
+    include(
+        "apps.cart.api.urls"
+    ),
+),
+
 ]

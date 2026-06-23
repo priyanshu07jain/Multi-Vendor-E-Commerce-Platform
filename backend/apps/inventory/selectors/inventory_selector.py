@@ -76,3 +76,21 @@ class InventorySelector:
                 variant__product__vendor_id=vendor_id
             )
         )
+    @staticmethod
+    def get_inventory_by_variant(
+        variant
+    ):
+
+        return (
+            Inventory.objects
+            .filter(
+                variant=variant
+            )
+            .select_related(
+                "variant"
+            )
+            .first()
+        )
+
+
+
