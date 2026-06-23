@@ -31,4 +31,10 @@ urlpatterns = [
             "apps.vendors.api.urls"
         )
     ),
+    path(
+        "api/catalog/",
+        include(
+            "apps.catalog.api.urls"
+        )
+    ),
 ]
