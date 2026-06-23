@@ -1,0 +1,26 @@
+# Python
+backend/venv/
+backend/__pycache__/
+backend/*.sqlite3
+backend/.env
+
+# Django
+backend/staticfiles/
+backend/media/
+
+# React
+frontend/node_modules/
+frontend/dist/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+
+backend/design-decision.md
+backend/interview_question.md
+backend/questions_answers.md
+backend/topice_covered.md
