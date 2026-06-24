@@ -4,6 +4,8 @@ from .views import (
     CheckoutAPIView,
     OrderListAPIView,
     OrderDetailAPIView,
+    OrderStatusAPIView,
+    CancelOrderAPIView
 )
 
 urlpatterns = [
@@ -25,4 +27,15 @@ urlpatterns = [
         OrderDetailAPIView.as_view(),
         name="order-detail",
     ),
+    path(
+    "<uuid:order_id>/status/",
+    OrderStatusAPIView.as_view(),
+    name="order-status",
+),
+
+path(
+    "<uuid:order_id>/cancel/",
+    CancelOrderAPIView.as_view(),
+    name="order-cancel",
+),
 ]

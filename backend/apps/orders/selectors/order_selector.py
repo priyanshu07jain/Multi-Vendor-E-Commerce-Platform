@@ -48,3 +48,27 @@ class OrderSelector:
                 user=user,
             )
         )
+    
+
+    @staticmethod
+    def get_vendor_orders(
+    *,
+    vendor_id,
+):
+
+        return (
+        Order.objects
+        .filter(
+            vendor_id=vendor_id
+        )
+        .select_related(
+            "user",
+            "vendor",
+        )
+        .prefetch_related(
+            "items"
+        )
+        .order_by(
+            "-created_at"
+        )
+    )

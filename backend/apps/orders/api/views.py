@@ -19,7 +19,18 @@ from apps.orders.services.order_service import (
 from .serializers import (
     OrderSerializer,
 )
+from rest_framework.exceptions import (
+    ValidationError,
+)
 
+from apps.orders.services.order_management_service import (
+    OrderManagementService,
+)
+
+from .serializers import (
+    OrderSerializer,
+    OrderStatusUpdateSerializer,
+)
 
 
 class CheckoutAPIView(
@@ -121,3 +132,101 @@ class OrderDetailAPIView(
         return Response(
             serializer.data
         )
+    
+
+class OrderStatusAPIView(
+    APIView
+):
+
+    permission_classes = [
+        IsAuthenticated
+    ]
+
+    def patch(
+        self,
+        request,
+        order_id
+    ):
+
+        order = (
+            OrderSelector.get_order_by_id(
+                user=request.user,
+                order_id=order_id,
+            )
+        )
+
+        serializer = (
+            OrderStatusUpdateSerializer(
+                data=request.data
+            )
+        )
+
+        serializer.is_valid(
+            raise_exception=True
+        )
+
+        try:
+
+            order = (
+                OrderManagementService
+                .update_status(
+                    order=order,
+                    **serializer.validated_data
+                )
+            )
+
+        except ValidationError as e:
+
+            raise ValidationError(
+                str(e)
+            )
+
+        return Response(
+            OrderSerializer(
+                order
+            ).data
+        )
+    
+
+class CancelOrderAPIView(
+    APIView
+):
+
+    permission_classes = [
+        IsAuthenticated
+    ]
+
+    def post(
+        self,
+        request,
+        order_id
+    ):
+
+        order = (
+            OrderSelector.get_order_by_id(
+                user=request.user,
+                order_id=order_id,
+            )
+        )
+
+        try:
+
+            order = (
+                OrderManagementService
+                .cancel_order(
+                    order=order
+                )
+            )
+
+        except ValidationError as e:
+
+            raise ValidationError(
+                str(e)
+            )
+
+        return Response(
+            OrderSerializer(
+                order
+            ).data
+        )
+    

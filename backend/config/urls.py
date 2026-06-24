@@ -55,5 +55,11 @@ path(
         "apps.orders.api.urls"
     ),
 ),
+path(
+    "api/addresses/",
+    include(
+        "apps.addresses.api.urls"
+    ),
+),
 
 ]

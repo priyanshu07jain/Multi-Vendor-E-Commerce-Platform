@@ -4,6 +4,11 @@ from apps.orders.models import (
     Order,
     OrderItem,
 )
+from apps.orders.models import (
+    Order,
+    OrderItem,
+    OrderStatus,
+)
 
 
 class OrderItemSerializer(
@@ -57,4 +62,10 @@ class OrderSerializer(
         ]
 
 
+class OrderStatusUpdateSerializer(
+    serializers.Serializer
+):
 
+    status = serializers.ChoiceField(
+        choices=OrderStatus.choices
+    )
